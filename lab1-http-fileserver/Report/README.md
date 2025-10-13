@@ -70,25 +70,25 @@ http://localhost:8000/
 <img src="./3.png" alt="Screenshot 3 – Access via browser" width="350">
 
 
-###Inexistent file (404):
+### Inexistent file (404):
 
 <img src="./14.png" alt="non existent" width="350">
 
 
-###HTML file with image:
+### HTML file with image:
 
 <img src="./15.png" alt="HTML file with image" width="350">
 
 
-###PDF file:
+### PDF file:
 
 <img src="./16.png" alt="PDF file" width="350">
 
-###PNG file:
+### PNG file:
 
 <img src="./17.png" alt="PNG file" width="350">
 
-##Client
+## Client
 
 
 ```bash
