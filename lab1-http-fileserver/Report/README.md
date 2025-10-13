@@ -42,6 +42,7 @@ This lab implements a HTTP/1.1 file server using raw TCP sockets in Python. The 
 # Build and start server
 docker compose build
 ```
+Builds the project’s Docker images from the Dockerfile(s) defined in docker-compose.yml, packaging all dependencies.
 <img src="./1.png" alt="Screenshot 1 – Build server" width="800">
 
 
@@ -49,6 +50,7 @@ docker compose build
 # Build and start server
 docker compose up -d web
 ```
+Starts the web service container in the background (detached), publishes its ports, and runs the HTTP server so others on the LAN can reach it.
 <img src="./2.png" alt="Screenshot 2 – Start server" width="800">
 
 ```bash
@@ -60,9 +62,13 @@ http://localhost:8000/
 ```bash
 # Run client examples
 docker compose run --rm client web 8000 /
-docker compose run --rm client web 8000 books/sample.pdf
+docker compose run --rm client web 8000 books/
 ```
+
+Runs the client container to request GET / from the web service on port 8000 and prints the HTML directory listing of the server’s root:
 <img src="./4.png" alt="Screenshot 4 – Root page prints HTML" width="800">
+
+Runs the client container to request GET /books/ from the web service on port 8000 and prints the HTML directory listing of the books subdirectory
 <img src="./5.png" alt="Screenshot 5 – `Listing for books, prints generated HTML`" width="800">
 
 
@@ -71,17 +77,31 @@ docker compose run --rm client web 8000 books/sample.pdf
 docker compose run --rm client web 8000 img/sample.png
 docker compose run --rm client web 8000 books/sample.pdf
 ```
+Downloads folder initially: 
 <img src="./6.png" alt="Screenshot 6 – Downloads folder before" width="800">
+
+Runs the client to fetch GET /img/sample.png from the web service on port 8000 and saves the PNG to downloads/sample.png:
 <img src="./7.png" alt="Screenshot 7 – Download png to downloads" width="800">
+ Runs the client to fetch GET /books/sample.pdf from the web service on port 8000 and saves the PDF to downloads/sample.pdf:
 <img src="./8.png" alt="Screenshot 8 – Download pdf to downloads" width="800">
+Downloads folder after:
 <img src="./9.png" alt="Screenshot 9 – Downloads folder after" width="800">
 
 
+
+
 ```bash
-# LAN access (get your IP first)
+# LAN access (get IP first)
 ipconfig getifaddr en0  # macOS
 http://<YOUR_IP>:8000/
 ```
+
+Results when reaching in the same LAN from another device:
+
+<img src="./11.jpeg" alt="Screenshot 10 – Phone reach server" width="800">
+
+Downloading for example the pdf:
+<img src="./12.png" alt="Screenshot 11 – Download" width="800">
 
 ```bash
 # Stop
@@ -203,22 +223,7 @@ services:
       - ./downloads:/app/downloads
 ```
 
----
 
-## Screenshots
-
-1. Source directory (./1.png)
-2. Docker files (./2.png)
-3. Container startup (./3.png)
-4. Container command (./4.png)
-5. Root directory listing (./5.png)
-6. 404 error (./6.png)
-7. HTML with image (./7.png)
-8. PDF in browser (./8.png)
-9. PNG in browser (./9.png)
-10. Client downloads (./10.png)
-11. /books/ listing (./11.png)
-12. /books/more/ listing (./12.png)
 
 ---
 
