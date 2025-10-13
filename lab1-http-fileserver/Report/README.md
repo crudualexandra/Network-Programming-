@@ -54,15 +54,36 @@ docker compose up -d web
 ```bash
 # Access via browser
 http://localhost:8000/
+```
+<img src="./3.png" alt="Screenshot 3 – Access via browser" width="800">
 
+```bash
 # Run client examples
 docker compose run --rm client web 8000 /
 docker compose run --rm client web 8000 books/sample.pdf
+```
+<img src="./4.png" alt="Screenshot 4 – Root page prints HTML" width="800">
+<img src="./5.png" alt="Screenshot 5 – `Listing for books, prints generated HTML`" width="800">
 
+
+```bash
+# Downloads
+docker compose run --rm client web 8000 img/sample.png
+docker compose run --rm client web 8000 books/sample.pdf
+```
+<img src="./6.png" alt="Screenshot 6 – Downloads folder before" width="800">
+<img src="./7.png" alt="Screenshot 7 – Download png to downloads" width="800">
+<img src="./8.png" alt="Screenshot 8 – Download pdf to downloads" width="800">
+<img src="./9.png" alt="Screenshot 9 – Downloads folder after" width="800">
+
+
+```bash
 # LAN access (get your IP first)
 ipconfig getifaddr en0  # macOS
 http://<YOUR_IP>:8000/
+```
 
+```bash
 # Stop
 docker compose down
 ```
