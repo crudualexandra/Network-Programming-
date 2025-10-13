@@ -53,11 +53,43 @@ docker compose up -d web
 Starts the web service container in the background (detached), publishes its ports, and runs the HTTP server so others on the LAN can reach it.
 <img src="./2.png" alt="Screenshot 2 – Start server" width="800">
 
+
+
+```bash
+python server.py /app/site --host 0.0.0.0 --port 8000
+```
+Runtime command inside container: python server.py /app/site --host 0.0.0.0 --port 8000 (where /app/site is the served root):
+
+<img src="./13.png" alt="Screenshot 13 – inside inspect" width="800">
+
+
 ```bash
 # Access via browser
 http://localhost:8000/
 ```
-<img src="./3.png" alt="Screenshot 3 – Access via browser" width="800">
+<img src="./3.png" alt="Screenshot 3 – Access via browser" width="350">
+
+
+###Inexistent file (404):
+
+<img src="./14.png" alt="non existent" width="350">
+
+
+###HTML file with image:
+
+<img src="./15.png" alt="HTML file with image" width="350">
+
+
+###PDF file:
+
+<img src="./16.png" alt="PDF file" width="350">
+
+###PNG file:
+
+<img src="./17.png" alt="PNG file" width="350">
+
+##Client
+
 
 ```bash
 # Run client examples
@@ -66,10 +98,12 @@ docker compose run --rm client web 8000 books/
 ```
 
 Runs the client container to request GET / from the web service on port 8000 and prints the HTML directory listing of the server’s root:
-<img src="./4.png" alt="Screenshot 4 – Root page prints HTML" width="800">
+<img src="./4.png" alt="Screenshot 4 – Root page prints HTML" width="500">
 
-Runs the client container to request GET /books/ from the web service on port 8000 and prints the HTML directory listing of the books subdirectory
-<img src="./5.png" alt="Screenshot 5 – `Listing for books, prints generated HTML`" width="800">
+Runs the client container to request GET /books/ from the web service on port 8000 and prints the HTML directory listing of the books subdirectory:
+
+<img src="./5.png" alt="Screenshot 5 – `Listing for books, prints generated HTML`" width="500">
+
 
 
 ```bash
@@ -78,15 +112,18 @@ docker compose run --rm client web 8000 img/sample.png
 docker compose run --rm client web 8000 books/sample.pdf
 ```
 Downloads folder initially: 
-<img src="./6.png" alt="Screenshot 6 – Downloads folder before" width="800">
+
+<img src="./6.png" alt="Screenshot 6 – Downloads folder before" width="400">
 
 Runs the client to fetch GET /img/sample.png from the web service on port 8000 and saves the PNG to downloads/sample.png:
-<img src="./7.png" alt="Screenshot 7 – Download png to downloads" width="800">
- Runs the client to fetch GET /books/sample.pdf from the web service on port 8000 and saves the PDF to downloads/sample.pdf:
-<img src="./8.png" alt="Screenshot 8 – Download pdf to downloads" width="800">
-Downloads folder after:
-<img src="./9.png" alt="Screenshot 9 – Downloads folder after" width="800">
 
+<img src="./7.png" alt="Screenshot 7 – Download png to downloads" width="400">
+ Runs the client to fetch GET /books/sample.pdf from the web service on port 8000 and saves the PDF to downloads/sample.pdf:
+ 
+<img src="./8.png" alt="Screenshot 8 – Download pdf to downloads" width="400">
+Downloads folder after:
+
+<img src="./9.png" alt="Screenshot 9 – Downloads folder after" width="400">
 
 
 
@@ -98,10 +135,10 @@ http://<YOUR_IP>:8000/
 
 Results when reaching in the same LAN from another device:
 
-<img src="./11.jpeg" alt="Screenshot 10 – Phone reach server" width="800">
+<img src="./11.jpeg" alt="Screenshot 10 – Phone reach server" width="300">
 
 Downloading for example the pdf:
-<img src="./12.png" alt="Screenshot 11 – Download" width="800">
+<img src="./12.png" alt="Screenshot 11 – Download" width="300">
 
 ```bash
 # Stop
@@ -244,3 +281,10 @@ services:
 ## Conclusion
 
 This lab demonstrates HTTP protocol implementation using raw TCP sockets. By building both server and client from scratch, we understand how application-layer protocols operate over transport-layer services. The containerized approach ensures portability and reproducibility while showcasing core networking concepts: socket programming, protocol formatting, and stateless communication.
+
+
+## Bibliography
+
+Kurose, J. F., & Ross, K. W. (2021). *Computer Networking: A Top-Down Approach* (8th ed.). Pearson.
+
+*Computer Networks - Chapter 2: Application Layer* [Video]. (n.d.). YouTube. https://youtu.be/74sEFYBBRAY?si=MttMCG5A8FjK6cyf
