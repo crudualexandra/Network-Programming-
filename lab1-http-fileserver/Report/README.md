@@ -41,9 +41,9 @@ This lab implements a HTTP/1.1 file server using raw TCP sockets in Python. The 
 ```bash
 # Build and start server
 docker compose build
-
+```
 <img src="./1.png" alt="Screenshot 1 – Source directory" width="800">
-
+```bash
 docker compose up -d web
 
 # Access via browser
