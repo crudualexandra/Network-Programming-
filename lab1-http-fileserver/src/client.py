@@ -1,3 +1,4 @@
+# File: src/client.py
 #!/usr/bin/env python3
 import os, sys, socket
 
@@ -42,7 +43,6 @@ def main():
         sys.exit(1)
 
     if ctype.startswith("text/html"):
-        # Print HTML as-is
         print(body.decode("utf-8", errors="replace"))
     elif ctype.startswith("image/png") or ctype.startswith("application/pdf"):
         os.makedirs("downloads", exist_ok=True)

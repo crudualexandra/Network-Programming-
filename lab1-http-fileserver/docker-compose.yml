@@ -1,23 +1,17 @@
-version: "3.9"
-
+# File: docker-compose.yml
 services:
   web:
     build: .
-    command: ["python","server.py","/app/site","--host","0.0.0.0","--port","8000"]
+    command: ["python","server.py","/app/site","--host","0.0.0.0","--port","8000","--workers","8","--delay","0.5"]
     ports:
-      - "8000:8000"           # Browser : http://localhost:8000
+      - "8000:8000"
     volumes:
       - ./src:/app
       - ./site:/app/site:ro
       - ./downloads:/app/downloads
-    restart: unless-stopped
-
   client:
     build: .
-    entrypoint: ["python","client.py"]   #  pass args at runtime
-    depends_on:
-      - web
+    entrypoint: ["python","client.py"]
     volumes:
       - ./src:/app
       - ./downloads:/app/downloads
-    
