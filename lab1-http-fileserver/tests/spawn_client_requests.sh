@@ -1,18 +1,18 @@
-# File: tests/spawn_client_requests.sh
-#!/usr/bin/env bash
+# fires N background curls to generate concurrent loadn d
+#!/usr/bin/env bashwq1  
 set -euo pipefail
-HOST=${1:-localhost}
-PORT=${2:-8000}
-PATHNAME=${3:-/}
 
-# run N concurrent client.py requests
+host=${1:?host}; port=${2:?port}; path=${3:?path}
 N=${N:-10}
+url="http://${host}:${port}${path}"
 
-echo "Spawning $N client requests to http://$HOST:$PORT$PATHNAME"
+echo "Spawning $N client requests to $url"
 pids=()
 for i in $(seq 1 "$N"); do
-  python3 src/client.py "$HOST" "$PORT" "${PATHNAME#/}" > /dev/null &
+  curl -s -o /dev/null "$url" &   # run in background
   pids+=($!)
 done
-for p in "${pids[@]}"; do wait "$p"; done
+for pid in "${pids[@]}"; do
+  wait "$pid"                     # wait for ALL, after the loop
+done
 echo "Done."
